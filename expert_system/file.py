@@ -12,8 +12,7 @@ class File:
 		try:
 			file = open(filename)
 		except IOError:
-			print("Open file failed")
-			sys.exit(1)
+			Error("Open file failed")
 		text = file.readlines()
 		for i, _ in enumerate(text):
 			text[i] = text[i].translate(None, '\t\n')
