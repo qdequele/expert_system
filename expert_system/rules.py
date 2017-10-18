@@ -22,7 +22,7 @@ class Rules:
 
 	def push(self, line):
 		if re.match("^\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
-			or _check_parentheses(line) is False:
+			or self._check_parentheses(line) is False:
 			Error("Error during parse rules")
 		self._rules.append(line)
 
