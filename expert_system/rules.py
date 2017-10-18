@@ -2,7 +2,9 @@ import re
 from error import *
 
 class Rules:
+
 	_rules = list()
+
 	def __init__(self):
 		pass
 
