@@ -23,7 +23,7 @@ class File:
 		text = filter(None, text)
 		self._initial = filter(None, ''.join(ch for ch, _ in itertools.groupby(filter(lambda x: x.startswith('?'), text))).translate(None, ' ?'))
 		self._queries = filter(None, ''.join(ch for ch, _ in itertools.groupby(filter(lambda x: x.startswith('='), text))).translate(None, ' ='))
-		self._rules = text
+		self._rules = filter(lambda x: not x.startswith('='), filter(lambda x: not x.startswith('?'), text))
 
 	def __str__(self):
 		return "Rules: %s\nInitials Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
