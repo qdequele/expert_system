@@ -1,4 +1,5 @@
 import itertools
+import sys
 
 class File:
 
@@ -29,6 +30,15 @@ class File:
 			.translate(None, ' ='))
 		self._rules = filter(lambda x: not x.startswith('='),
 			filter(lambda x: not x.startswith('?'), text))
+		if len(self._initial) == 0:
+			print("Imposible to resolve, please add initial facts")
+			sys.exit(1)
+		if len(self._queries) == 0:
+			print("No queries found, please add a querie at the end of the file")
+			sys.exit(1)
+		if len(self._rules) == 0:
+			print("No rules found, please add rules")
+			sys.exit(1)
 
 	def __str__(self):
-		return "Rules: %s\nInitials Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
+		return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
