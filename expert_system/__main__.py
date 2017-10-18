@@ -12,4 +12,5 @@ def check_params():
 
 check_params()
 file = File(sys.argv[1])
+for rule in file.getRules()
 print(file)
