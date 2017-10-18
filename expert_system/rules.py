@@ -13,17 +13,18 @@ class Rules:
         for c in line:
             if c == '(':
                 i += 1
-            elif c == ')'
+            elif c == ')':
                 i -= 1
-            if i == -1
+            if i == -1:
                 return False
         return i == 0
 
     def push(self, line):
-        if re.match("^\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None
+        if re.match("^\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
             or _check_parentheses(line) is False:
             print("Error during parse rules")
             sys.exit(1)
+		re.
         self._rules.append(line)
 
     def getRules(self):
