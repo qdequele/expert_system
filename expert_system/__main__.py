@@ -19,7 +19,15 @@ def parse_file():
 			text[i] = None
 		pass
 	text = filter(None, text)
+	return text
+
+def get_values(text):
 	print(text)
+	questions = filter(lambda x: x.startswith('?'), text)
+	print(questions)
+	affirmations = filter(lambda x: x.startswith('='), text)
+	print(affirmations)
 
 check_params()
-parse_file()
+text = parse_file()
+get_values(text)
