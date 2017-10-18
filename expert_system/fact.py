@@ -8,4 +8,4 @@ class Fact:
 		self._value = value
 
 	def __str__(self):
-		return self._letter + ' = ' + self._value
+		return self._letter + ' = ' + str(self._value)
