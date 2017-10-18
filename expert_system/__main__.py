@@ -1,4 +1,5 @@
 import sys
+import rules
 
 def check_params():
 	if len(sys.argv) > 2:
@@ -9,7 +10,11 @@ def check_params():
 		sys.exit(1)
 
 def parse_file():
-	file = open(sys.argv[1])
+	try:
+		file = open(sys.argv[1])
+	except IOError:
+		print("Open file failed")
+		sys.exit(1)
 	text = file.readlines()
 	for i, _ in enumerate(text):
 		text[i] = text[i].translate(None, '\t\n')
