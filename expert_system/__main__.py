@@ -1,6 +1,7 @@
 import sys
 import fact
 from file import *
+from rules import *
 
 def check_params():
 	if len(sys.argv) > 2:
@@ -10,6 +11,8 @@ def check_params():
 
 check_params()
 file = File(sys.argv[1])
-
-# for rule in file.getRules():
+rules = Rules()
+for rule in file.getRules():
+	print(rule)
+	rules.push(rule)
 print(file)
