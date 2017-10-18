@@ -5,8 +5,8 @@ from rules import *
 from fact import *
 from resolver import *
 
-
 class Main:
+
 	_file = File(sys.argv[1])
 	_rules = Rules()
 	_facts = list()
