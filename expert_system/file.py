@@ -1,6 +1,6 @@
 import itertools
 import sys
-from error import Error
+from error import *
 
 class File:
 
@@ -40,5 +40,5 @@ class File:
 	def __str__(self):
 		return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
 
-	def getRules():
-		return _rules
+	def getRules(self):
+		return self._rules
