@@ -12,7 +12,10 @@ def check_params():
 check_params()
 file = File(sys.argv[1])
 rules = Rules()
+
 for rule in file.getRules():
-	print(rule)
 	rules.push(rule)
-print(file)
+
+for initial in file.getInitials():
+	rules.push(rule)
+
