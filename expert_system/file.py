@@ -42,3 +42,6 @@ class File:
 
 	def __str__(self):
 		return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
+
+	def getRules():
+		return _rules
