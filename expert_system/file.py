@@ -15,7 +15,7 @@ class File:
 			Error("Open file failed")
 		text = file.readlines()
 		for i, _ in enumerate(text):
-			text[i] = text[i].translate(None, '\t\n')
+			text[i] = text[i].translate(None, '\t\n ')
 			text[i], _, _ = text[i].partition('#')
 			text[i] = text[i].strip()
 			if len(text[i]) == 0:
