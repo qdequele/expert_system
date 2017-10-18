@@ -42,3 +42,9 @@ class File:
 
 	def getRules(self):
 		return self._rules
+
+	def getInitials(self):
+		return self._initial
+
+	def getQueries(self):
+		return self._queries
