@@ -1,6 +1,6 @@
 import itertools
 import sys
-from error import Error
+from error import *
 
 class File:
 
@@ -15,7 +15,7 @@ class File:
 			Error("Open file failed")
 		text = file.readlines()
 		for i, _ in enumerate(text):
-			text[i] = text[i].translate(None, '\t\n')
+			text[i] = text[i].translate(None, '\t\n ')
 			text[i], _, _ = text[i].partition('#')
 			text[i] = text[i].strip()
 			if len(text[i]) == 0:
@@ -40,5 +40,5 @@ class File:
 	def __str__(self):
 		return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._initial, self._queries)
 
-	def getRules():
-		return _rules
+	def getRules(self):
+		return self._rules
