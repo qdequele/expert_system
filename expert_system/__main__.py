@@ -4,13 +4,12 @@ from file import *
 
 def check_params():
 	if len(sys.argv) > 2:
-		print("Too mutch arguments")
-		sys.exit(1)
+		Error("Too mutch arguments")
 	if len(sys.argv) == 1:
-		print("Please enter a file as argument")
-		sys.exit(1)
+		Error("Please enter a file as argument")
 
 check_params()
 file = File(sys.argv[1])
-for rule in file.getRules()
+
+# for rule in file.getRules():
 print(file)
