@@ -21,6 +21,7 @@ class Main:
 			self._facts.append(_f)
 		res = Resolver(self._rules, self._facts, self._file.getQueries())
 		print(str(self._facts))
+		print(self._rules)
 
 	def _check_params(self):
 		if len(sys.argv) > 2:

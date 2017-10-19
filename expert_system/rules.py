@@ -22,15 +22,23 @@ class Rules:
 				return False
 		return i == 0
 
+	def _formating(self, ope):
+		match = re.match("^(\(.*\)|.*)([+^|])(\(.*\)|.*)$", ope)
+		if match is not None:
+			data = match.groups()	
+			ope = list()
+			ope.append(self._formating(data[0]))
+			ope.append(data[1])
+			ope.append(self._formating(data[2]))
+		return ope
+
 	def push(self, line):
 		if re.match("^!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
 			or self._check_parentheses(line) is False:
 			Error("Error during parse rules")
 		rule = re.split("=>|<=>", line)
-		for item, fact in rule:
-			print(fact, item)
-			# rule[item] = re.split("([+|^])", fact)
-			# print(fact)
+		for item, fact in enumerate(rule):
+			rule[item] = self._formating(fact)
 		self._rules.append(rule)
 
 	def getRules(self):
