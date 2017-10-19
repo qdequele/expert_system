@@ -11,6 +11,9 @@ class Fact:
 	def __str__(self):
 		return self.letter + ' = ' + str(self.value)
 
+	def op_not(self):
+		self.value is not self.value
+
 	def op_or(self, left, right):
 		if left.value is True or right.value is True
 			self.value = True
