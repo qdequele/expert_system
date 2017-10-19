@@ -21,10 +21,15 @@ class Rules:
 		return i == 0
 
 	def push(self, line):
-		if re.match("^\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
+		if re.match("^!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(<?=>)!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
 			or self._check_parentheses(line) is False:
 			Error("Error during parse rules")
-		self._rules.append(line)
+		rule = re.split("=>|<=>", line)
+		for item, fact in rule:
+			print(fact, item)
+			# rule[item] = re.split("([+|^])", fact)
+			# print(fact)
+		self._rules.append(rule)
 
 	def getRules(self):
 		return self._rules
