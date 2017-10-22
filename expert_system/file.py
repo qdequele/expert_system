@@ -26,7 +26,7 @@ class File:
         initial = filter(None, ''.join(ch for ch, _ in itertools.groupby(
             filter(lambda x: x.startswith('?'), text)))
             .translate(None, ' ?'))
-        facts = filter(None, set(''.join(text).translate(None, ' ?=()>+^|!')))
+        facts = filter(None, set(''.join(text).translate(None, ' ?=()<>+^|!')))
         for fact in facts:
             if fact in initial:
                 self.facts.append(Fact(fact, True))
