@@ -39,7 +39,6 @@ class Tree:
             res = Node(operator=res[0], left=res[1])
         elif len(res) is 3:
             res = Node(left=res[0], operator=res[1], right=res[2])
-        # print(res)
         return res
 
 

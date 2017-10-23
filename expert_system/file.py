@@ -6,15 +6,12 @@ from rule import *
 from tree import *
 class File:
 
-    rules = []
-    queries = []
-    tree = Tree()
-
     def __init__(self, filename):
         try:
             file = open(filename)
         except IOError:
             Error("Open file failed")
+        self.tree = Tree()
         text = file.readlines()
         for i, _ in enumerate(text):
             text[i] = text[i].translate(None, '\t\n ')
@@ -25,17 +22,17 @@ class File:
             pass
         text = filter(None, text)
         initial = filter(None, ''.join(ch for ch, _ in itertools.groupby(
-            filter(lambda x: x.startswith('?'), text)))
-            .translate(None, ' ?'))
+            filter(lambda x: x.startswith('='), text)))
+            .translate(None, ' ='))
         facts = filter(None, set(''.join(text).translate(None, ' ?=()<>+^|!')))
         for fact in facts:
             if fact in initial:
-                self.tree.append(fact, Fact(True))
+                self.tree.append(fact, Fact(fact, True))
             else:
-                self.tree.append(fact, Fact())
+                self.tree.append(fact, Fact(fact))
         self.queries = filter(None, ''.join(ch for ch, _ in itertools.groupby(
-            filter(lambda x: x.startswith('='), text)))
-            .translate(None, ' ='))
+            filter(lambda x: x.startswith('?'), text)))
+            .translate(None, ' ?'))
         self.rules = map(lambda x: Rule(x), filter(lambda x: not x.startswith('='),
             filter(lambda x: not x.startswith('?'), text)))
         if len(initial) == 0:
