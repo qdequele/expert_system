@@ -36,21 +36,23 @@ class Node:
             return None
 
     def solve_or(self):
-        if self.left.val() or self.right.val() is True:
+        if self.left.val() is True or self.right.val() is True:
             return True
+        elif self.left.val() is None or self.right.val() is None:
+            return None
         else:
             return False
     
     def solve_and(self):
-        if self.left.val() or self.right.val() is None:
-            return None
-        elif self.left.val() and self.right.val() is True:
+        if self.left.val() is True and self.right.val() is True:
             return True
+        elif self.left.val() is None or self.right.val() is None:
+            return None
         else:
             return False
 
     def solve_xor(self):
-        if self.left.val() or self.right.val() is None:
+        if self.left.val() is None or self.right.val() is None:
             return None
         elif self.left.val() is self.right.val():
             return False
