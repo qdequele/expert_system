@@ -8,8 +8,6 @@ from resolver import *
 class Main:
 
     _file = File(sys.argv[1])
-    _rules = Rules()
-    _facts = list()
 
     def __init__(self):
         self._check_params()
