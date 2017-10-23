@@ -7,7 +7,7 @@ class File:
 
     rules = []
     queries = []
-    facts = []
+    facts = {}
 
     def __init__(self, filename):
         try:
@@ -24,17 +24,17 @@ class File:
             pass
         text = filter(None, text)
         initial = filter(None, ''.join(ch for ch, _ in itertools.groupby(
-            filter(lambda x: x.startswith('?'), text)))
-            .translate(None, ' ?'))
+            filter(lambda x: x.startswith('='), text)))
+            .translate(None, ' ='))
         facts = filter(None, set(''.join(text).translate(None, ' ?=()<>+^|!')))
         for fact in facts:
             if fact in initial:
-                self.facts.append(Fact(fact, True))
+                self.facts[fact] = True
             else:
-                self.facts.append(Fact(fact))
+                self.facts[fact] = None
         self.queries = filter(None, ''.join(ch for ch, _ in itertools.groupby(
-            filter(lambda x: x.startswith('='), text)))
-            .translate(None, ' ='))
+            filter(lambda x: x.startswith('?'), text)))
+            .translate(None, ' ?'))
         self.rules = map(lambda x: Rule(x), filter(lambda x: not x.startswith('='),
             filter(lambda x: not x.startswith('?'), text)))
         if len(initial) == 0:

@@ -1,9 +1,10 @@
 from fact import *
+from error import *
 
 class Resolver:
 
     _rules = []
-    _facts = []
+    _facts = {}
     _queries = []
 
     def __init__(self, rules, facts, queries):
@@ -15,72 +16,83 @@ class Resolver:
         return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._facts, self._queries)
 
     def resolve(self):
-        # print("resolve:")
-        # print(self._rules)
+        print("resolve : %s"%(self._queries))
         for query in self._queries:
             val = self.search(query, self._rules)
             if val is None:
-                print("Impossible to answer")
+                Error("Impossible to answer")
             else:
                 print("{} is {}".format(query, val))
 
     def search(self, query, rules):
         for i, rule in enumerate(rules):
+            print("search %s in rule: %s"%(query, rule))
             if query in rule[0]:
-                self.searchInRule(query, rules, i, -1)
+                return self.searchInRule(query, rules, i, -1)
             elif query in rule[-1]:
-                self.searchInRule(query, rules, i, 0)
+                return self.searchInRule(query, rules, i, 0)
             else:
-                return None
+                pass
 
     def searchInRule(self, query, rules, index, pos):
+        print("searchInRule: %s"%(rules[index][pos]))
         if len(rules[index][pos]) is 1:
-            value = filter(lambda x: x.letter is rules[index][pos], self._facts)[0].value
+            value = self._facts[rules[index][pos]]
             if value is not None:
-                filter(lambda x: x.letter is query, self._facts)[0].value = value
+                print("searchInRule value: %s"%(value))
                 return value
             else:
+                print("searchInRule value is none")
                 return self.search(rules[index][pos], [rules.pop(index - 1)])
         else:
-            self.solve(rules[index][pos])
+            print("searchInRule need to solve new operation")
+            return self.solve(rules[index][pos])
 
     def solve(self, op):
         if len(op) is 1:
             if op[0].startswith('!'):
-                return solve_not(filter(lambda x: x.letter is op[0], self._facts)[0].value)
+                return self.solve_not(op[0])
             else:
-                return filter(lambda x: x.letter is op[0], self._facts)[0].value
+                return self._facts[op[0]]
         elif op[1] is '|':
-            return solve_or(self.solve(op[0]), self.solve(op[2]))
+            return self.solve_or(self.solve(op[0]), self.solve(op[2]))
         elif op[1] is '+':
-            return solve_and(self.solve(op[0]), self.solve(op[2]))
+            return self.solve_and(self.solve(op[0]), self.solve(op[2]))
         elif op[1] is '^':
-            return solve_xor(self.solve(op[0]), self.solve(op[2]))
+            return self.solve_xor(self.solve(op[0]), self.solve(op[2]))
 
     def solve_not(self, fact):
-        if fact.value is not None:
+        if fact is not None:
             return not fact.value
         else:
             return None
 
     def solve_or(self, fact1, fact2):
-        if fact1.value or fact2 is True:
+        if fact1 is True or fact2 is True:
+            print("fact1: %s | fact2: %s -> True"%(fact1, fact2))
             return True
         else:
+            print("fact1: %s | fact2: %s -> False"%(fact1, fact2))
             return False
     
     def solve_and(self, fact1, fact2):
-        if fact1.value or fact2 is None:
+        if fact1 is None or fact2 is None:
+            print("fact1: %s + fact2: %s -> None"%(fact1, fact2))
             return None
-        elif fact1.value and fact2 is True:
+        elif fact1 is True and fact2 is True:
+            print("fact1: %s + fact2: %s -> True"%(fact1, fact2))
             return True
         else:
+            print("fact1: %s + fact2: %s -> False"%(fact1, fact2))
             return False
 
     def solve_xor(self, fact1, fact2):
-        if fact1.value or fact2 is None:
+        if fact1 is None or fact2 is None:
+            print("fact1: %s ^ fact2: %s -> None"%(fact1, fact2))
             return None
-        elif fact1.value is fact2.value:
+        elif fact1 is fact2:
+            print("fact1: %s ^ fact2: %s -> False"%(fact1, fact2))
             return False
         else:
+            print("fact1: %s ^ fact2: %s -> True"%(fact1, fact2))
             return True
