@@ -1,3 +1,5 @@
+from node import *
+
 class Tree:
 
     def __init__(self):
@@ -25,13 +27,18 @@ class Tree:
     def _searchFact(self, ope):
         res = [None]*len(ope)
         for index, elem in enumerate(ope):
-            print(index, elem)
             if isinstance(elem, list):
                 res[index] = self._searchFact(elem)
+                
             elif elem.isalpha():
                 res[index] = self.tree[elem]
             else:
                 res[index] = elem
+        if len(res) is 2:
+            res = Node(operator=res[0], left=res[1])
+        elif len(res) is 3:
+            res = Node(left=res[0], operator=res[1], right=res[2])
+        print(res)
         return res
 
 
