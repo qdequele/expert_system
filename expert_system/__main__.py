@@ -1,7 +1,7 @@
 import sys
 import fact
 from file import *
-from rules import *
+from rule import *
 from fact import *
 from tree import *
 from resolver import *
