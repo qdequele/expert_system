@@ -2,6 +2,8 @@ import sys
 
 class Node:
 
+    type = "node"
+
     functions = {
         '|': 'solve_or',
         '+': 'solve_and',
