@@ -25,11 +25,12 @@ class Tree:
         self.tree[letter].ope.append(ope)
 
     def _searchFact(self, ope):
+        if isinstance(ope, str):
+            return self.tree[ope]
         res = [None]*len(ope)
         for index, elem in enumerate(ope):
             if isinstance(elem, list):
                 res[index] = self._searchFact(elem)
-                
             elif elem.isalpha():
                 res[index] = self.tree[elem]
             else:
@@ -38,7 +39,7 @@ class Tree:
             res = Node(operator=res[0], left=res[1])
         elif len(res) is 3:
             res = Node(left=res[0], operator=res[1], right=res[2])
-        print(res)
+        # print(res)
         return res
 
 
