@@ -13,13 +13,15 @@ class Main:
 
     def __init__(self):
         self._check_params()
-        print(self._file)
-        res = Resolver(self._file.rules, self._file.facts, self._file.queries)
+        # print(self._file)
+        self._file.tree.addOpe(self._file.rules)
+        res = Resolver(self._file.rules, self._file.tree, self._file.queries)
+        print(self._file.tree)
         res.resolve()
 
     def _check_params(self):
         if len(sys.argv) > 2:
-            Error("Too mutch arguments")
+            Error("Too much arguments")
         if len(sys.argv) == 1:
             Error("Please enter a file as argument")
 

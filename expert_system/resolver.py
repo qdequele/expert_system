@@ -3,16 +3,16 @@ from fact import *
 class Resolver:
 
     _rules = []
-    _facts = []
+    _tree = []
     _queries = []
 
-    def __init__(self, rules, facts, queries):
+    def __init__(self, rules, tree, queries):
         self._rules = rules
-        self._facts = facts
+        self._tree = tree
         self._queries = queries
 
     def __str__(self):
-        return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._facts, self._queries)
+        return "Rules: %s\nInitial Tree: %s\nQueries : %s\n"%(self._rules, self._tree, self._queries)
 
     def resolve(self):
         # print("resolve:")
@@ -35,9 +35,9 @@ class Resolver:
 
     def searchInRule(self, query, rules, index, pos):
         if len(rules[index][pos]) is 1:
-            value = filter(lambda x: x.letter is rules[index][pos], self._facts)[0].value
+            value = filter(lambda x: x.letter is rules[index][pos], self._tree)[0].value
             if value is not None:
-                filter(lambda x: x.letter is query, self._facts)[0].value = value
+                filter(lambda x: x.letter is query, self._tree)[0].value = value
                 return value
             else:
                 return self.search(rules[index][pos], [rules.pop(index - 1)])
@@ -47,9 +47,9 @@ class Resolver:
     def solve(self, op):
         if len(op) is 1:
             if op[0].startswith('!'):
-                return solve_not(filter(lambda x: x.letter is op[0], self._facts)[0].value)
+                return solve_not(filter(lambda x: x.letter is op[0], self._tree)[0].value)
             else:
-                return filter(lambda x: x.letter is op[0], self._facts)[0].value
+                return filter(lambda x: x.letter is op[0], self._tree)[0].value
         elif op[1] is '|':
             return solve_or(self.solve(op[0]), self.solve(op[2]))
         elif op[1] is '+':
