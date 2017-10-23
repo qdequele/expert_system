@@ -3,8 +3,6 @@ from error import *
 
 class Rule:
 
-    rule = []
-
     def __init__(self, line):
         if re.match("^!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+(=>)!?\(?!?[A-Z]\)?(([+^|]\(?!?[A-Z]\)?)?)+$", line) is None\
             or self._check_parentheses(line) is False:
