@@ -3,12 +3,12 @@ import fact
 from file import *
 from rules import *
 from fact import *
+from tree import *
 from resolver import *
 
 class Main:
 
     _file = File(sys.argv[1])
-    _rules = Rules()
     _facts = list()
 
     def __init__(self):
