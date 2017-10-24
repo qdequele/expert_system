@@ -1,0 +1,11 @@
+#Same conclusion in multiple rules
+#The program can handle multiple rules that have the same conclusion.
+
+B => A 
+C => A
+
+?A
+
+=C
+
+# A = True
