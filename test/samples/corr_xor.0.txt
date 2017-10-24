@@ -1,0 +1,12 @@
+#Basic XOR conditions
+#The program can handle basic XOR conditions.
+
+B + C => A 
+D ^ E => B 
+B => C 
+
+?A 
+
+=
+
+# A = False

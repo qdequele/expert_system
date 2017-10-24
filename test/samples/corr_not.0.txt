@@ -1,0 +1,10 @@
+#Negation
+#The program can handle negation.
+
+B + !C => A
+
+?A
+
+=
+
+# A = False
