@@ -45,4 +45,9 @@ class Tree:
     def addOpe(self, rules):
         for elem in rules:
             res = self._searchFact(elem[0])
-            self._add(elem[1], res)
+            if len(elem[1]) == 3:
+                self._add(elem[1][0], res)
+                self._add(elem[1][-1], res)
+            else:
+                self._add(elem[1], res)
+                
