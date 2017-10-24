@@ -11,9 +11,12 @@ class Main:
 
     def __init__(self):
         self._check_params()
-        print(self._file)
         res = Resolver(self._file.rules, self._file.facts, self._file.queries)
+        print ""
+        print(res)
         res.resolve()
+        print ""
+        print(res)
 
     def _check_params(self):
         if len(sys.argv) > 2:

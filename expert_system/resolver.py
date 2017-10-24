@@ -16,40 +16,57 @@ class Resolver:
         return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self._rules, self._facts, self._queries)
 
     def resolve(self):
-        print("resolve : %s"%(self._queries))
         for query in self._queries:
+            print ""
+            print("resolve : %s"%(query))
+            print(self._rules)
             val = self.search(query, self._rules)
             if val is None:
+                print ""
+                print(str(self))
                 Error("Impossible to answer")
             else:
-                print("{} is {}".format(query, val))
+                self._facts[query] = val
+                print("===== > {} is {}".format(query, val))
 
     def search(self, query, rules):
         for i, rule in enumerate(rules):
             print("search %s in rule: %s"%(query, rule))
             if query in rule[0]:
-                return self.searchInRule(query, rules, i, -1)
+                value = self.searchInRule(query, list(rules), i, -1)
+                print("set %s = %s"%(query, value))
+                self._facts[query] = value
+                return value
             elif query in rule[-1]:
-                return self.searchInRule(query, rules, i, 0)
+                value = self.searchInRule(query, list(rules), i, 0)
+                print("set %s = %s"%(query, value))
+                self._facts[query] = value
+                return value
             else:
-                pass
+                print("no rule found")
 
     def searchInRule(self, query, rules, index, pos):
-        print("searchInRule: %s"%(rules[index][pos]))
         if len(rules[index][pos]) is 1:
             value = self._facts[rules[index][pos]]
             if value is not None:
-                print("searchInRule value: %s"%(value))
+                print("searchInRule %s: %s"%(rules[index][pos], value))
+                print("set %s = %s"%(rules[index][pos], value))
+                self._facts[rules[index][pos]] = value
                 return value
             else:
-                print("searchInRule value is none")
+                print("searchInRule %s is None"%(rules[index][pos]))
                 return self.search(rules[index][pos], [rules.pop(index - 1)])
         else:
-            print("searchInRule need to solve new operation")
-            return self.solve(rules[index][pos])
+            print("searchInRule need to solve new operation : %s"%(rules[index][pos]))
+            solve = self.solve(rules[index][pos])
+            if solve is not None:
+                return solve
+            else:
+                print("no used")
+                pass
 
     def solve(self, op):
-        if len(op) is 1:
+        if len(op) <= 2:
             if op[0].startswith('!'):
                 return self.solve_not(op[0])
             else:
@@ -63,7 +80,7 @@ class Resolver:
 
     def solve_not(self, fact):
         if fact is not None:
-            return not fact.value
+            return not fact
         else:
             return None
 
