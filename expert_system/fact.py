@@ -10,10 +10,11 @@ class Fact:
         self.ope =[]
 
     def __str__(self):
-        string = "{%s: %s, ope :"%(self.letter, self.value)
+        string = "%s: %s, ope :"%(self.letter, self.value)
+        if len(self.ope) is 0:
+            string += "[]"
         for elem in self.ope:
             string += "\n\t%s"%(elem)
-        string += "\n}"
         return string
 
     def val(self):
