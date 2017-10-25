@@ -1,0 +1,11 @@
+#Parentheses
+#The program can handle parenthesised expressions correctly
+
+A | B + C => E
+(F | G) + H => E
+
+?E 
+
+=BC
+
+# E = True

@@ -1,6 +1,9 @@
 !A   => C
 B | D  => C
-D => A
+A => !D
 
 =A
 ?BD
+
+# B = None
+# D = False

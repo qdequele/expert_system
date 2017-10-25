@@ -3,17 +3,15 @@ import sys
 from error import *
 from fact import *
 from rule import *
+from tree import *
 class File:
-
-    rules = []
-    queries = []
-    facts = {}
 
     def __init__(self, filename):
         try:
             file = open(filename)
         except IOError:
             Error("Open file failed")
+        self.tree = Tree()
         text = file.readlines()
         for i, _ in enumerate(text):
             text[i] = text[i].translate(None, '\t\n ')
@@ -29,9 +27,9 @@ class File:
         facts = filter(None, set(''.join(text).translate(None, ' ?=()<>+^|!')))
         for fact in facts:
             if fact in initial:
-                self.facts[fact] = True
+                self.tree.append(fact, Fact(fact, True))
             else:
-                self.facts[fact] = None
+                self.tree.append(fact, Fact(fact))
         self.queries = filter(None, ''.join(ch for ch, _ in itertools.groupby(
             filter(lambda x: x.startswith('?'), text)))
             .translate(None, ' ?'))
@@ -45,4 +43,4 @@ class File:
             Error("No rules found, please add rules")
 
     def __str__(self):
-        return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self.rules, self.facts, self.queries)
+        return "Rules: %s\nInitial Fatcs: %s\nQueries : %s\n"%(self.rules, self.tree, self.queries)
