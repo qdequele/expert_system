@@ -18,6 +18,8 @@ class Main:
         res = Resolver(self._file.rules, self._file.tree, self._file.queries)
         print(self._file.tree)
         res.resolve()
+        print ""
+        print(res)
 
     def _check_params(self):
         if len(sys.argv) > 2:
