@@ -18,7 +18,8 @@ class Fact:
         return string
 
     def val(self):
-        return self.value if self.value is not None else False
+        val = self.solve()
+        return val if val is not None else False
 
     def solve(self):
         ret = []

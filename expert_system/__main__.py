@@ -15,7 +15,7 @@ class Main:
         self._check_params()
         self._file.tree.addOpe(self._file.rules)
         res = Resolver(self._file.rules, self._file.tree, self._file.queries)
-        print(self._file.tree)
+        # print(self._file.tree)
         res.resolve()
 
     def _check_params(self):
