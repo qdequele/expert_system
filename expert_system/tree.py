@@ -8,7 +8,7 @@ class Tree:
     def __str__(self):
         string = "{\n"
         for letter in self.tree:
-            string += "\t'%c': %s,\n"%(letter, str(self.tree[letter]))
+            string += "%s\n"%(str(self.tree[letter]))
         string += "}"
         return string
 
