@@ -6,4 +6,4 @@ A => !D
 ?BD
 
 # B = None
-# D = True
+# D = False
