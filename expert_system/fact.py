@@ -10,10 +10,14 @@ class Fact:
         self.ope =[]
 
     def __str__(self):
-        return "{%s : %s, ope : %s}"%(self.letter, self.value, self.ope)
+        string = "{%s: %s, ope :"%(self.letter, self.value)
+        for elem in self.ope:
+            string += "\n\t%s"%(elem)
+        string += "\n}"
+        return string
 
     def val(self):
-        return self.value
+        return self.value if self.value is not None else False
 
     def solve(self):
         ret = []
