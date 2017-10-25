@@ -24,6 +24,8 @@ class Fact:
     def solve(self):
         ret = []
         for node in self.ope:
+            if node is self:
+                return self.value
             ret.append(node.solve())
         if ret.count(True) and ret.count(False):
             print("Incompatible operations")
