@@ -22,7 +22,10 @@ class Tree:
         return self.tree[letter]
 
     def _add(self, letter, ope):
-        self.tree[letter].ope.append(ope)
+        if isinstance(letter, list):
+            self.tree[letter[1]].ope.append(Node(operator='!', left=ope))
+        else:
+            self.tree[letter].ope.append(ope)
 
     def _searchFact(self, ope):
         if isinstance(ope, str):
