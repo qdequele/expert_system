@@ -1,4 +1,5 @@
 from fact import *
+from error import *
 
 class Resolver:
 
