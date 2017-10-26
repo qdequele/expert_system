@@ -35,8 +35,8 @@ class File:
             .translate(None, ' ?'))
         self.rules = map(lambda x: Rule(x), filter(lambda x: not x.startswith('='),
             filter(lambda x: not x.startswith('?'), text)))
-        if len(initial) == 0:
-            Error("Imposible to resolve, please add initial facts")
+        # if len(initial) == 0:
+        #     Error("Imposible to resolve, please add initial facts")
         if len(self.queries) == 0:
             Error("No queries found, please add a querie at the end of the file")
         if len(self.rules) == 0:

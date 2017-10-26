@@ -14,4 +14,4 @@ class Resolver:
     def resolve(self):
         for query in self._queries:
             result = self._tree.get(query).solve()
-            print("%s = %s"%(query, result))
+            print("%s = %s"%(query, result if result is not None else False))
