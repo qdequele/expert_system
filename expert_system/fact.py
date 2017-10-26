@@ -27,9 +27,9 @@ class Fact:
             if node is self:
                 return self.value
             ret.append(node.solve())
-        if ret.count(True) and ret.count(False):
-            print("Incompatible operations")
-            sys.exit(0)
+        # if ret.count(True) and ret.count(False):
+        #     print("Incompatible operations")
+        #     sys.exit(0)
         value = True if ret.count(True) else False if ret.count(False) else None
         if self.value is not None and value is not None and self.value is not value:
             print("Difference between initial and calculate value")
