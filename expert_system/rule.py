@@ -39,10 +39,12 @@ class Rule:
         match = re.match("^(\(.*\)|.*)([+^|])(\(.*\)|.*)$", ope)
         if match is not None:
             data = match.groups()
+            print("data : %s"%(str(data)))
             ope = list()
             ope.append(self._formating(data[0]))
             ope.append(data[1])
             ope.append(self._formating(data[2]))
         if len(ope) == 2:
-            ope = list(ope)
+            ope = ope.replace("(", "")
+            ope = ope.replace(")", "")
         return ope
