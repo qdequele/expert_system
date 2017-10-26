@@ -16,6 +16,7 @@ def cmd_output(com):
 path_tests = "test/samples"
 files = [ f for f in os.listdir(path_tests) if "error" not in f ]
 
+allError = 0
 
 for file in files:
     f = open("%s/%s"%(path_tests, file), "r")
@@ -41,3 +42,6 @@ for file in files:
             err = 1
     if err is 0:
         print("%s ..... \033[92mOk\033[0m"%(file))
+    allError += err
+
+sys.exit(allError)
