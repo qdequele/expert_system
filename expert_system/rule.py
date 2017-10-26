@@ -39,12 +39,17 @@ class Rule:
         matchXor = re.match(r"^((\))?.*(\))?)(\^)((\))?.*(\))?)$", ope)
         matchAnd = re.match(r"^((\))?.*(\))?)(\+)((\))?.*(\))?)$", ope)
         matchOr = re.match(r"^((\))?.*(\))?)(\|)((\))?.*(\))?)$", ope)
-        # print("formating : %s"%(ope))
-        if matchOr is not None:
+        if matchOr is not None 
+            and matchOr.groups()[0].count("(") == matchOr.groups()[0].count(")") 
+            and matchOr.groups()[1].count("(") == matchOr.groups()[1].count(")"):
             ope = self._match(filter( None, matchOr.groups()))
-        elif matchAnd is not None:
+        elif matchAnd is not None
+            and matchAnd.groups()[0].count("(") == matchAnd.groups()[0].count(")") 
+            and matchAnd.groups()[1].count("(") == matchAnd.groups()[1].count(")"):
             ope = self._match(filter( None, matchAnd.groups()))
-        elif matchXor is not None:
+        elif matchXor is not None
+            and matchXor.groups()[0].count("(") == matchXor.groups()[0].count(")") 
+            and matchXor.groups()[1].count("(") == matchXor.groups()[1].count(")"):
             ope = self._match(filter( None, matchXor.groups()))
         if len(ope) == 2:
             ope = ope.replace("(", "")
