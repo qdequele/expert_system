@@ -36,15 +36,25 @@ class Rule:
         return i == 0
 
     def _formating(self, ope):
-        match = re.match("^(\(.*\)|.*)([+^|])(\(.*\)|.*)$", ope)
-        if match is not None:
-            data = match.groups()
-            print("data : %s"%(str(data)))
-            ope = list()
-            ope.append(self._formating(data[0]))
-            ope.append(data[1])
-            ope.append(self._formating(data[2]))
+        matchXor = re.match(r"^((\))?.*(\))?)(\^)((\))?.*(\))?)$", ope)
+        matchAnd = re.match(r"^((\))?.*(\))?)(\+)((\))?.*(\))?)$", ope)
+        matchOr = re.match(r"^((\))?.*(\))?)(\|)((\))?.*(\))?)$", ope)
+        # print("formating : %s"%(ope))
+        if matchOr is not None:
+            ope = self._match(filter( None, matchOr.groups()))
+        elif matchAnd is not None:
+            ope = self._match(filter( None, matchAnd.groups()))
+        elif matchXor is not None:
+            ope = self._match(filter( None, matchXor.groups()))
         if len(ope) == 2:
             ope = ope.replace("(", "")
             ope = ope.replace(")", "")
+        return ope
+
+    def _match(self, data):
+        ope = list()
+        # print ("%s %s %s"%(data[0], data[1], data[2]))
+        ope.append(self._formating(data[0]))
+        ope.append(data[1])
+        ope.append(self._formating(data[2]))
         return ope
