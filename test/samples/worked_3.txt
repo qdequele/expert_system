@@ -5,5 +5,5 @@ A => !D
 =A
 ?BD
 
-# B = None
+# B = False
 # D = False

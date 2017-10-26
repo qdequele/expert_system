@@ -14,7 +14,7 @@ def cmd_output(com):
     return output , errput
 
 path_tests = "test/samples"
-files = [ f for f in os.listdir(path_tests) if "corr" in f ]
+files = [ f for f in os.listdir(path_tests) if "error" not in f ]
 
 
 for file in files:
