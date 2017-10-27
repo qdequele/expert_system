@@ -58,7 +58,6 @@ class Rule:
 
     def _match(self, data):
         ope = list()
-        # print ("%s %s %s"%(data[0], data[1], data[2]))
         ope.append(self._formating(data[0]))
         ope.append(data[1])
         ope.append(self._formating(data[2]))
